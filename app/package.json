@@ -1,0 +1,38 @@
+{
+  "name": "node-test",
+  "version": "1.0.0",
+  "description": "Node test app",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha --timeout 10000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Heehaaw/NodeTest.git"
+  },
+  "keywords": [
+    "node",
+    "test"
+  ],
+  "author": "Janek Milota",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Heehaaw/NodeTest/issues"
+  },
+  "homepage": "https://github.com/Heehaaw/NodeTest#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "fs": "0.0.1-security",
+    "morgan": "^1.7.0",
+    "q": "^1.4.1",
+    "redis": "^2.6.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "fakeredis": "^1.0.3",
+    "mocha": "^3.0.2",
+    "sinon": "^1.17.6"
+  }
+}
