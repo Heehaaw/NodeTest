@@ -14,7 +14,7 @@
  * @property {String} TRACK_FILE_NAME the name for the file the POST request params will be stored into. Defaults to 'track.txt'.
  */
 var config = {
-	APP_PORT: process.env.APP_PORT || 80801,
+	APP_PORT: process.env.APP_PORT || 8080,
 	REDIS_URL: process.env.REDIS_URL || 'localhost',
 	REDIS_PORT: process.env.REDIS_PORT || 9090,
 	DATA_FOLDER: process.env.DATA_FOLDER || './data',
