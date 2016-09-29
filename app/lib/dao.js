@@ -1,5 +1,5 @@
 /**
- * The Data Access Object for the test application. This module handles Redis a
+ * The Data Access Object for the test application. This module handles Redis and FS i/o.
  *
  * @author jan.milota
  * @since 24.09.2016
