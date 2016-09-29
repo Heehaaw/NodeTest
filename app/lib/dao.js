@@ -8,6 +8,7 @@
 var fs = require('fs'),
 	q = require('q'),
 	redis = require('redis'),
+	lockFile = require('lockfile'),
 	config = require('./config.js'),
 	client = redis.createClient({
 		host: config.getRedisUrl(),
@@ -46,6 +47,8 @@ var fs = require('fs'),
 	fsAppendFile = promisify(fs, fs.appendFile),
 	redisSet = promisify(client, client.set),
 	redisGet = promisify(client, client.get),
+	lfLock = promisify(lockFile, lockFile.lock),
+	lfUnlock = promisify(lockFile, lockFile.unlock),
 
 	/**
 	 * Stores the JSON params to a file. Creates the appropriate directory tree and/or the file if either does not exist.
@@ -55,8 +58,11 @@ var fs = require('fs'),
 
 		var dataFolder = config.getDataFolder(),
 			trackFileName = config.getTrackFileName(),
+			lockFilePath = dataFolder + '/' + 'lock_' + trackFileName,
 			append = function () {
-				return fsAppendFile(dataFolder + '/' + trackFileName, JSON.stringify(params) + '\n');
+				return lfLock(lockFilePath, { retryWait: 100 }) // On lock acquisition failure retry in 100ms
+					.then(fsAppendFile(dataFolder + '/' + trackFileName, JSON.stringify(params) + '\n'))
+					.then(lfUnlock(lockFilePath));
 			};
 
 		return fsMkDir(dataFolder)
